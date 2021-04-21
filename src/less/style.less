@@ -1,18 +1,25 @@
-@background-page: lightblue;
+@background-color-page: rgb(65 80 115);
+@background-color-screens: rgb(#cd920e);
+@font-color-page: whitesmoke;
 @font-size-buttons: 20px;
 
 body {
-    margin: 0;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    color: whitesmoke;
 }
 
 .page-wrapper {
+
+    min-height: 100vh;
 
     display: flex;
     flex-direction: column;
 
     header {
         display: flex;
-        background: @background-page;
+        background-color: @background-color-page;
+
+        font-size: 25px;
         width: 100%;
         height: 50px;
         justify-content: center;
@@ -23,127 +30,80 @@ body {
         display: flex;
         flex-direction: column;
         min-height: 700px;
+        flex-grow: 1;
 
-        // #screen-wrapper {
-        //     flex-grow: 1;
-
-        //     display: flex;
-        //     flex-direction: column;
-
-        //     .screen {
-        //         flex-grow: 1;
-        //     }
-        // }
-
+        // Only holder grouping the buttons with screens
         input { display: none; }
 
-        div {
-            clear: both;
+        .screen {
+            display: flex;  // should be used by specific screens
             padding: 1em;
+            flex-grow: 1;
+            background-color: @background-color-screens;
         }
 
-        label {
-            cursor: pointer;
-            display: block;
-            float: left;
-            width: 33.33%;
-            text-align: center;
-            text-shadow: 0 1px 1px #000;
-            text-decoration: none;
-            font-size: 120%;
-            border-bottom: 1px solid #555;
-            line-height: 3;
-            transition: 300ms;
+        #nav-screens {
+            display: flex;
+            background-color: grey;
+
+            label {
+                flex-grow: 1;
+                flex-basis: 0;
+                cursor: pointer;
+                text-align: center;
+                font-size: @font-size-buttons;
+                color: whitesmoke;
+                line-height: 50px;
+                transition: background-color 1000ms;
+            }
         }
 
-        label:hover, #a:checked ~ [for=a], #b:checked ~ [for=b], #c:checked ~ [for=c] {
+
+        // hover over nav-screens items will change color
+        label:hover,
+        #a:checked ~ #nav-screens [for=a],
+        #b:checked ~ #nav-screens [for=b],
+        #c:checked ~ #nav-screens [for=c]
+        {
             background-color: rgba(255, 255, 255, 0.1);
         }
 
-        span {
-            display: block;
-            width: 33.33%;
-            height: 4px;
-            background-color: cyan;
-            position: relative;
-            top: -3px;
-            left: -100%;
-            clear: both;
-            transition: 300ms;
-        }
-
-        #a:not(:checked) ~ #screen-start, #b:not(:checked) ~ #screen-timer, #c:not(:checked) ~ #screen-settings {
+        // hide unactive screens
+        #a:not(:checked) ~ #screen-structures, #b:not(:checked) ~ #screen-timer, #c:not(:checked) ~ #screen-settings {
             display: none;
         }
         
-        #a:checked ~ span { left: 0; }
-        #b:checked ~ span { left: 33.33%; }
-        #c:checked ~ span { left: 66.67%; }
-        
-
-        // #page-nav ol {
-        //     display: flex;
-        //     flex-direction: row;
-        // }
-        // #page-nav {
-        //     display: flex;
-        //     justify-content: space-between;
-        //     flex-direction: row;
-        //     height: 100px;
-        //     width: 100%;
-        //     align-items: stretch;
-
-        // }
-
-
-        // #page-nav button {
-        //     background-color: lightgreen;
-        //     flex-grow: 1;
-        //     flex-basis: 0;
-        //     cursor: pointer;
-        //     color: white;
-        //     padding: 0px 10px;
-        //     text-align: center;
-        //     text-decoration: none;
-        //     font-size: @font-size-buttons;
-        // }
-
-        // #button-new-game {
-        //     display: none;
-        // }
     }
 
     footer {
         display: flex;
         flex-direction: column;
-        background: @background-page;
+        flex-grow: 0.5;
+        background-color: @background-color-page;
         width: 100%;
-        height: 100px;
+        max-height: 100px;
         justify-content: center;
         align-content: center;
         align-items: center;
 
         p {
             margin: 5px;
+
+            a {
+                color: @background-color-screens;
+            }
+            a:hover {
+                color: yellow;
+            }
         }
     }
 }
 
-#screen-start {
-    background-color: coral;
+@media (min-width: 900px) {
+    body {
+        width: 900px;
+        background-color: @background-color-page;
+        margin: auto;
+    }
 }
 
-#screen-timer {
-    background-color: darkcyan;
-    // display: none;
-}
-
-
-#screen-settings {
-    background-color: darkgreen;
-    // display: none;
-}
-
-// #a:not(:checked) ~ #screen-new-game, #b:not(:checked) ~ #screen-timer, #c:not(:checked) ~ #screen-settings {
-//     display: none;
-// }

@@ -14,19 +14,22 @@
         
         <page>
 
-            <input type=radio name=x id=a />
+            <input type=radio name=x id=a checked/>
             <input type=radio name=x id=b />
             <input type=radio name=x id=c />
 
-            <label for=a>Položka A</label>
-            <label for=b>Položka B</label>
-            <label for=c>Položka C</label>
-            <span></span>
+            <nav id="nav-screens">
+                <label for=a>Structures</label>
+                <label for=b>Timer</label>
+                <label for=c>Settings</label>
+            </nav>
+            <!-- <span></span> -->
 
-            <div class="screen" id="screen-start">
+
+            <div class="screen" id="screen-structures">
                 <h2>Menu</h2>
 
-                <nav id="menu">
+                <nav id="Structures">
                     <ul>
                         <li><a href="" data-state="data state attribute">First</a></li>
                         <li><a href="">Second</a></li>
@@ -52,40 +55,6 @@
                 <label id="menu-control" for="menu-control-input">Menu</label><input type="checkbox" id="menu-control-input" />
 
             </div>
-
-
-            <!-- <div id="screen-wrapper">
-                <div class="screen" id="screen-new-game">
-                    <h2>Menu</h2>
-
-                    <nav id="menu">
-                        <ul>
-                            <li><a href="" data-state="data state attribute">First</a></li>
-                            <li><a href="">Second</a></li>
-                            <li><a href="">Third</a></li>
-                            <li><a href="">Fourth</a></li>
-                            <li><a href="">Fifth</a></li>
-                        </ul>
-                    </nav>
-            
-                
-                </div>
-
-                <div class="screen" id="screen-timer">
-
-                    <h2>Custom Design Checkbox</h2>
-            
-                    <input id="custom-checkbox-input" type="checkbox">
-                    <label id="custom-checkbox" for="custom-checkbox-input"></label>
-
-                </div>
-
-                <div class="screen" id="screen-settings">
-                    <label id="menu-control" for="menu-control-input">Menu</label><input type="checkbox" id="menu-control-input" />
-
-                </div>
-                
-            </div> -->
 
         </page>
 
