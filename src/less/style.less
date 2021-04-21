@@ -24,43 +24,89 @@ body {
         flex-direction: column;
         min-height: 700px;
 
-        #screen-wrapper {
-            flex-grow: 1;
+        // #screen-wrapper {
+        //     flex-grow: 1;
 
-            display: flex;
-            flex-direction: column;
-            // height: 100%;
+        //     display: flex;
+        //     flex-direction: column;
 
-            .screen {
-                flex-grow: 1;
-            }
+        //     .screen {
+        //         flex-grow: 1;
+        //     }
+        // }
+
+        input { display: none; }
+
+        div {
+            clear: both;
+            padding: 1em;
         }
+
+        label {
+            cursor: pointer;
+            display: block;
+            float: left;
+            width: 33.33%;
+            text-align: center;
+            text-shadow: 0 1px 1px #000;
+            text-decoration: none;
+            font-size: 120%;
+            border-bottom: 1px solid #555;
+            line-height: 3;
+            transition: 300ms;
+        }
+
+        label:hover, #a:checked ~ [for=a], #b:checked ~ [for=b], #c:checked ~ [for=c] {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        span {
+            display: block;
+            width: 33.33%;
+            height: 4px;
+            background-color: cyan;
+            position: relative;
+            top: -3px;
+            left: -100%;
+            clear: both;
+            transition: 300ms;
+        }
+
+        #a:not(:checked) ~ #screen-start, #b:not(:checked) ~ #screen-timer, #c:not(:checked) ~ #screen-settings {
+            display: none;
+        }
+        
+        #a:checked ~ span { left: 0; }
+        #b:checked ~ span { left: 33.33%; }
+        #c:checked ~ span { left: 66.67%; }
+        
 
         // #page-nav ol {
         //     display: flex;
         //     flex-direction: row;
         // }
-        #page-nav {
-            display: flex;
-            justify-content: space-between;
-            flex-direction: row;
-            height: 100px;
-            width: 100%;
-            align-items: stretch;
-        }
+        // #page-nav {
+        //     display: flex;
+        //     justify-content: space-between;
+        //     flex-direction: row;
+        //     height: 100px;
+        //     width: 100%;
+        //     align-items: stretch;
+
+        // }
 
 
-        #page-nav button {
-            background-color: lightgreen;
-            flex-grow: 1;
-            flex-basis: 0;
-            cursor: pointer;
-            color: white;
-            padding: 0px 10px;
-            text-align: center;
-            text-decoration: none;
-            font-size: @font-size-buttons;
-        }
+        // #page-nav button {
+        //     background-color: lightgreen;
+        //     flex-grow: 1;
+        //     flex-basis: 0;
+        //     cursor: pointer;
+        //     color: white;
+        //     padding: 0px 10px;
+        //     text-align: center;
+        //     text-decoration: none;
+        //     font-size: @font-size-buttons;
+        // }
 
         // #button-new-game {
         //     display: none;
@@ -83,15 +129,21 @@ body {
     }
 }
 
-#screen-new-game {
+#screen-start {
     background-color: coral;
 }
 
 #screen-timer {
     background-color: darkcyan;
-    display: none;
+    // display: none;
 }
+
 
 #screen-settings {
     background-color: darkgreen;
+    // display: none;
 }
+
+// #a:not(:checked) ~ #screen-new-game, #b:not(:checked) ~ #screen-timer, #c:not(:checked) ~ #screen-settings {
+//     display: none;
+// }
