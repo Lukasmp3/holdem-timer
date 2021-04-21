@@ -13,23 +13,39 @@
         <header>Holdem Timer</header>
         
         <page>
-            <h2>Menu</h2>
 
-            <label id="menu-control" for="menu-control-input">Menu</label><input type="checkbox" id="menu-control-input" />
-            <nav id="menu">
-                <ul>
-                    <li><a href="" data-state="data state attribute">First</a></li>
-                    <li><a href="">Second</a></li>
-                    <li><a href="">Third</a></li>
-                    <li><a href="">Fourth</a></li>
-                    <li><a href="">Fifth</a></li>
-                </ul>
-            </nav>
-    
-            <h2>Custom Design Checkbox</h2>
-    
-            <input id="custom-checkbox-input" type="checkbox">
-            <label id="custom-checkbox" for="custom-checkbox-input"></label>
+            <div id="screen-wrapper">
+                <div class="screen" id="screen-new-game">
+                    <h2>Menu</h2>
+
+                    <nav id="menu">
+                        <ul>
+                            <li><a href="" data-state="data state attribute">First</a></li>
+                            <li><a href="">Second</a></li>
+                            <li><a href="">Third</a></li>
+                            <li><a href="">Fourth</a></li>
+                            <li><a href="">Fifth</a></li>
+                        </ul>
+                    </nav>
+            
+                
+                </div>
+
+                <div class="screen" id="screen-timer">
+
+                    <h2>Custom Design Checkbox</h2>
+            
+                    <input id="custom-checkbox-input" type="checkbox">
+                    <label id="custom-checkbox" for="custom-checkbox-input"></label>
+
+                </div>
+
+                <div class="screen" id="screen-settings">
+                    <label id="menu-control" for="menu-control-input">Menu</label><input type="checkbox" id="menu-control-input" />
+
+                </div>
+                
+            </div>
             
             <nav id="page-nav">
                 <!-- <ol>
@@ -37,9 +53,9 @@
                     <li><a href="">Timer</a></li> 
                     <li><a href="">Settings</a></li> 
                 </ol> -->
-                <button class="button button-new-game">New game</button>
-                <button class="button button-timer">Timer</button>
-                <button class="button button-settings">Settings</button>
+                <button id="button-new-game">New game</button>
+                <button id="button-timer">Timer</button>
+                <button id="button-settings">Settings</button>
             </nav>
 
         </page>

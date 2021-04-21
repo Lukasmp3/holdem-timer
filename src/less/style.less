@@ -22,6 +22,19 @@ body {
     page {
         display: flex;
         flex-direction: column;
+        min-height: 700px;
+
+        #screen-wrapper {
+            flex-grow: 1;
+
+            display: flex;
+            flex-direction: column;
+            // height: 100%;
+
+            .screen {
+                flex-grow: 1;
+            }
+        }
 
         // #page-nav ol {
         //     display: flex;
@@ -48,6 +61,10 @@ body {
             text-decoration: none;
             font-size: @font-size-buttons;
         }
+
+        // #button-new-game {
+        //     display: none;
+        // }
     }
 
     footer {
@@ -64,4 +81,17 @@ body {
             margin: 5px;
         }
     }
+}
+
+#screen-new-game {
+    background-color: coral;
+}
+
+#screen-timer {
+    background-color: darkcyan;
+    display: none;
+}
+
+#screen-settings {
+    background-color: darkgreen;
 }
