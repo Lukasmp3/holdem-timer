@@ -1,10 +1,11 @@
-class Main {
-    test: string;
+import {Clock} from './clock';
 
-    constructor(test: string) {
-        console.log(test)
-        this.test = test;
-    }
+function init() {
+
+    // Once the page is loaded, update times
+    window.addEventListener("load", function(){
+        Clock.updateAllTimers();
+    });
 }
 
-const s = new Main('testikaa');
+init();

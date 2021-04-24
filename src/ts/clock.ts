@@ -1,4 +1,28 @@
-class Clock {
+export class Clock {
+
+    _sessionStartTime: Date;
+
+    constructor() {
+        this._sessionStartTime = new Date();
+    }
+
+    private getSessionTime(): string {
+        const currentTime = new Date();
+        const sessionTime = new Date(currentTime.getTime() - this._sessionStartTime.getTime());
+        // console.log(sessionTime);
+        const hours = sessionTime.getHours() - 1;   // TODO: check output time
+        // console.log(hours);
+        const minutes = sessionTime.getMinutes();
+        const seconds = sessionTime.getSeconds();
+        return String(hours) + ':' + String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
+    }
+
+    updateSessionTime(): void {
+        const timeSession = this.getSessionTime();
+        const timeSessionEl = document.querySelector("#time-session-clock") as HTMLInputElement;
+        // timeRealEl.innerText = timeReal;
+        timeSessionEl.textContent = timeSession;
+    }
 
     /**
      * Get the current time string and prepend zeros to minute value:
@@ -7,7 +31,7 @@ class Clock {
      *    5:45
      * @returns hour:minute string
      */
-    static getCurrentTimeString(): string {
+    private static getCurrentTime(): string {
         const currentTime = new Date();
         const hours = currentTime.getHours();
         const minutes = currentTime.getMinutes();
@@ -17,23 +41,29 @@ class Clock {
     /**
      * Update the real time for element #time-real
      */
-    static updateTimeReal() {
-        const timeReal = Clock.getCurrentTimeString()
+    static updateRealTime(): void {
+        const timeReal = Clock.getCurrentTime()
         const timeRealEl = document.querySelector("#time-real") as HTMLInputElement;
         // timeRealEl.innerText = timeReal;
         timeRealEl.textContent = timeReal;
     }
 
+
+
     /**
-     * Repeatidly update all timers every second
+     * Repeatedly update all timers every second
      */
-    static updateAllTimers() {
-        setInterval(() => Clock.updateTimeReal(), 1000);
+    static updateAllTimers(): void {
+        Clock.updateRealTime();
+        setInterval(() => Clock.updateRealTime(), 1000);
     }
 
 }
 
-Clock.updateAllTimers();
+const clockSession = new Clock();
 
-// const timer = setInterval(() => Clock.updateTimeReal(), 1000);
+// TODO: dummy implementation of session updating
+setInterval(() => clockSession.updateSessionTime(), 1000);
+
+
 

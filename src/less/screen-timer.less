@@ -23,13 +23,51 @@
 
     }
     
-    #time-info {
+    #info-round {
         background-color: brown;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex-grow: 1;
+        
+
+        #blinds {
+            display: flex;
+            text-align: center;
+            flex-grow: 1;
+
+            > * {
+                flex-grow: 1;
+                flex-basis: 0;
+            }
+        }
+
+        #time-round-wrap {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            background-color: cornflowerblue;
+            height: 150px;
+
+            .clock {
+                font-size: 80px;
+                text-align: center;
+            }
+        }
+
     }
     
     #control {
-        background-color: chartreuse;
-        height: 150px;
+        display: flex;
+        justify-content: space-between;
+        background-color: green;
+        height: 200px;
+        text-align: center;
+
+        > * {
+            flex-grow: 1;
+            flex-basis: 0;
+        }
+
     }
 }
-
