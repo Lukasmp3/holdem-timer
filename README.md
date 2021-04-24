@@ -1,4 +1,4 @@
-# holdem-timer
+# Holdem Timer
 
 ## Build and start
 
@@ -7,3 +7,7 @@ tsc
 lessc src/less/style.less dist/style.css
 yarn start
 ```
+
+## Technologies
+TypeScript  
+less.js
