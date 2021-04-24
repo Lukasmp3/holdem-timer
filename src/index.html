@@ -4,6 +4,8 @@
 <head>
     <meta charset="utf-8">
     <title>Holdem Timer</title>
+    <script src="../dist/main.js"></script>
+    <script src="../dist/clock.js"></script>
     <link rel="stylesheet" href="../dist/style.css" type="text/css" />
 </head>
 
@@ -11,11 +13,13 @@
 
     <div class="page-wrapper">
         <header>Holdem Timer</header>
-        
+
         <page>
 
-            <input type=radio name=x id=screen-a checked/>
-            <input type=radio name=x id=screen-b />
+            <!-- <input type=radio name=x id=screen-a checked /> -->
+            <input type=radio name=x id=screen-a />
+            <!-- <input type=radio name=x id=screen-b /> -->
+            <input type=radio name=x id=screen-b checked/>
             <input type=radio name=x id=screen-c />
 
             <nav id="nav-screens">
@@ -29,30 +33,34 @@
             <div class="screen" id="screen-structures">
                 <h2>Menu</h2>
 
-                <nav id="Structures">
-                    <ul>
-                        <li><a href="" data-state="data state attribute">First</a></li>
-                        <li><a href="">Second</a></li>
-                        <li><a href="">Third</a></li>
-                        <li><a href="">Fourth</a></li>
-                        <li><a href="">Fifth</a></li>
-                    </ul>
-                </nav>
-        
-            
-            </div>
-
-            <div class="screen" id="screen-timer">
-
                 <h2>Custom Design Checkbox</h2>
-        
+
                 <input id="custom-checkbox-input" type="checkbox">
                 <label id="custom-checkbox" for="custom-checkbox-input"></label>
 
+
+            </div>
+
+            <div class="screen" id="screen-timer">
+                <div id="time-global">
+                    <div id="time-session">
+                        <label>Session:</label>
+                        <div id="time-session-clock" class="clock">00:00</div>
+                    </div>
+                    <div id="time-real" class="clock"></div>
+                    <!-- <div id="time-real" class="clock" onload="Clock.updateTimeReal()">20:00</div> -->
+                </div>
+                <div id="time-info">
+                    <h2>Menu</h2>
+                </div>
+                <div id="control">
+                    <h2>Menu</h2>
+                </div>
             </div>
 
             <div class="screen" id="screen-settings">
-                <label id="menu-control" for="menu-control-input">Menu</label><input type="checkbox" id="menu-control-input" />
+                <label id="menu-control" for="menu-control-input">Menu</label><input type="checkbox"
+                    id="menu-control-input" />
 
             </div>
 
@@ -64,8 +72,10 @@
         </footer>
     </div>
 
-
-    <script src="../dist/main.js"></script>
+    <script>
+        console.log('mydebug')
+        // const x = Main.Main('testik2');
+    </script>
 </body>
 
 </html>

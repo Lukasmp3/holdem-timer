@@ -1,3 +1,5 @@
+@import 'screen-timer.less';
+
 @background-color-page: rgb(65 80 115);
 @background-color-screens: rgb(#cd920e);
 @font-color-page: whitesmoke;
@@ -6,6 +8,8 @@
 body {
     font-family: 'Helvetica', 'Arial', sans-serif;
     color: whitesmoke;
+    margin: 0;
+    background-color: @background-color-page;
 }
 
 .page-wrapper {
@@ -38,8 +42,8 @@ body {
         input { display: none; }
 
         .screen {
-            display: flex;  // specific screens should be flexbox elements
-            padding: 1em;
+            // padding: 1em;
+            padding: 0;
             flex-grow: 1;
             background-color: @background-color-screens;
         }
@@ -104,7 +108,6 @@ body {
 @media (min-width: 900px) {
     body {
         width: 900px;
-        background-color: @background-color-page;
         margin: auto;
     }
 }
