@@ -1,5 +1,5 @@
 export class Control {
-	
+
 	static init() {
 		Control.onClick('control-play', () => this.onClickPlay());
 		Control.onClick('control-pause', () => this.onClickPause());
@@ -37,6 +37,4 @@ export class Control {
 	}
 
 
-	
-	
 }
