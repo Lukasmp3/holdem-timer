@@ -6,6 +6,7 @@
     <title>Holdem Timer</title>
     <script src="../dist/main.js"></script>
     <script src="../dist/clock.js"></script>
+    <script src="../dist/control.js"></script>
     <link rel="stylesheet" href="../dist/style.css" type="text/css" />
 </head>
 
@@ -74,20 +75,19 @@
                         </svg>
                     </div>
                     <div id="control-play-pause">
-                        <div id="control-play">
-                            <svg height="200" width="200">
-                                <rect width="200" height="200" rx="15" style="fill:purple"/>
-                                <polygon points="30,20 180,100 30,180" style="fill:lime" />
-                            </svg>
-                        </div>
-                        <div id="control-pause">
-                            <svg height="200" width="200">
-                                <rect width="200" height="200" rx="15" style="fill:purple"/>
-                                <polygon points="50,40 80,40 80,160 50,160" style="fill:lime" />
-                                <polygon points="120,40 150,40 150,160 120,160" style="fill:lime" />
-                            </svg>
-                        </div>
-                        
+                        <audio id="sound-round-new">
+                            <source src="sound/round-new.mp3" type="audio/mpeg">
+                            Your browser does not support the audio element.
+                          </audio>
+                        <svg id="control-play" height="200" width="200">
+                            <rect width="200" height="200" rx="15" style="fill:purple"/>
+                            <polygon points="30,20 180,100 30,180" style="fill:lime" />
+                        </svg>
+                        <svg id="control-pause" height="200" width="200">
+                            <rect width="200" height="200" rx="15" style="fill:purple"/>
+                            <polygon points="50,40 80,40 80,160 50,160" style="fill:lime" />
+                            <polygon points="120,40 150,40 150,160 120,160" style="fill:lime" />
+                        </svg>
                     </div>
                     <div id="control-forward">
                         <svg height="200" width="200">
