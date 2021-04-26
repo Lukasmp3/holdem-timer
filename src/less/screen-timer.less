@@ -39,6 +39,21 @@
             > * {
                 flex-grow: 1;
                 flex-basis: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .box {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 25px;
+                background: salmon;
+                padding: 20px; 
+                width: 200px;
+                height: 200px;
+                font-size: 50px;
             }
         }
 
@@ -73,6 +88,12 @@
                 cursor: pointer;
                 transition: filter 300ms;
 
+                rect {
+                    fill: purple;
+                }
+                polygon {
+                    fill: lime;
+                }
             }
 
             > svg:hover {
