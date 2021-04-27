@@ -6,10 +6,13 @@ export class BlindStructure {
     private _blindLevels: BlindLevel[];
     
     private _currentLevel: number;
+
+    private _levelDurationSeconds: number;
     
-    constructor(blindLevels: BlindLevel[]) {
+    constructor(blindLevels: BlindLevel[], levelDurationSeconds: number = 600) {
         this._blindLevels = blindLevels;
         this._currentLevel = 1;
+        this._levelDurationSeconds = levelDurationSeconds;
 	}
 
     public increaseCurrentLevel(): void {
@@ -47,5 +50,9 @@ export class BlindStructure {
 
     public get currentLevel(): number {
         return this._currentLevel;
+    }
+
+    public get levelDurationSeconds(): number {
+        return this._levelDurationSeconds;
     }
 }

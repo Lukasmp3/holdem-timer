@@ -68,14 +68,14 @@ body {
         // hover over nav-screens items will change color
         label:hover,
         #screen-a:checked ~ #nav-screens [for=screen-a],
-        #screen-b:checked ~ #nav-screens [for=screen-b],
-        #screen-c:checked ~ #nav-screens [for=screen-c]
+        #screen-b:checked ~ #nav-screens [for=screen-b]
+        // ,#screen-c:checked ~ #nav-screens [for=screen-c]
         {
             background-color: rgba(255, 255, 255, 0.3);
         }
 
         // hide unactive screens
-        #screen-a:not(:checked) ~ #screen-structures, #screen-b:not(:checked) ~ #screen-timer, #screen-c:not(:checked) ~ #screen-settings {
+        #screen-a:not(:checked) ~ #screen-new-game, #screen-b:not(:checked) ~ #screen-timer {
             display: none;
         }
         

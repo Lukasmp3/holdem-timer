@@ -1,3 +1,6 @@
+/**
+ * Controlls all dynamic clocks on the 'screen-timer'
+ */
 export class Clock {
 
     _sessionStartTime: Date;

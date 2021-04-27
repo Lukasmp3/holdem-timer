@@ -6,9 +6,10 @@ import { SessionHandler } from './session-handler';
 
 function init() {
 
+
     Clock.updateAllTimers();
-    Control.init();
-    SessionHandler.init();
+    const sessionHandler = new SessionHandler();
+    new Control(sessionHandler);
 
 }
 

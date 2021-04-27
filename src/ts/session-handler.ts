@@ -1,4 +1,3 @@
-import { BlindStructure } from "./blinds/blind-structure";
 import { Session } from "./session";
 
 /**
@@ -8,18 +7,18 @@ import { Session } from "./session";
  */
 export class SessionHandler {
 
-    private static session: Session;
+    private _session: Session;
 
-    public static init(): void {
-        this.session = new Session(new BlindStructure(BlindStructure.initDefaultBlindLevels()));
+    public constructor() {
+        this._session = Session.initDefalutSession();
     }
 
-    public static newSession(session: Session) {
-        this.session = session;
+    public set session(session: Session) {
+        this._session = session;
     }
 
-    public static getSession(): Session {
-        return this.session;
+    public get session(): Session {
+        return this._session;
     }
 
 }
