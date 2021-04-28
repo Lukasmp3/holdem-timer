@@ -7,18 +7,31 @@ export class Control {
 
 	constructor(sessionHandler: SessionHandler) {
 		this.sessionHandler = sessionHandler;
-		this.onClick('control-play', () => this.onClickPlay());
-		this.onClick('control-pause', () => this.onClickPause());
+		this.onClick('control-play', () => this.playNewRoundSound());
 		this.onClick('control-rewind', () => this.previousLevel());
-		this.onClick('control-forward', () => this.nextLevel());
+		this.onClick('control-forward', () => this.setNextLevel());
 		this.onChange('screen-b', () => this.renderTimerScreen());
 	}
 
-	public isCurrentlyPaused(): boolean {
-		console.log('todo')
-		return false;
-		// const control-
-		// TODO: dodelat
+	public isSessionPaused(): boolean {
+		const pauseEl = document.querySelector("#input-control-pause") as HTMLInputElement;
+		return (pauseEl.checked) ? true : false;
+	}
+
+	/**
+	 * Increase level and re-render if changed
+	 */
+	 public setNextLevel(): void {
+		// TODO: mozna presunout increasCurentLevel do Session
+		if (this.getCurrentSession().blindStructure.increaseCurrentLevel()) {
+			this.getCurrentSession().resetRemainingLevelDuration();
+			this.renderBlindStructure();
+		}
+	}
+
+	public playNewRoundSound(): void {
+		const audio = document.getElementById('sound-round-new') as HTMLAudioElement;
+		audio.play();
 	}
 
 	private getCurrentSession(): Session {return this.sessionHandler.session}
@@ -64,17 +77,6 @@ export class Control {
 	}
 
 	/**
-	 * Increase level and re-render if changed
-	 */
-	private nextLevel(): void {
-		// TODO: mozna presunout increasCurentLevel do Session
-		if (this.getCurrentSession().blindStructure.increaseCurrentLevel()) {
-			this.getCurrentSession().resetRemainingLevelDuration();
-			this.renderBlindStructure();
-		}
-	}
-
-	/**
 	 * Decrease level and re-render if changed
 	 */
 	private previousLevel(): void {
@@ -83,30 +85,5 @@ export class Control {
 			this.renderBlindStructure();
 		}
 	}
-
-	private onClickPlay(): void {
-		this.replaceControlPlayByPause();
-		this.playNewRoundSound();
-	}
-
-	private onClickPause(): void {
-		this.replaceControlPauseByPlay();
-	}
-
-	private replaceControlPlayByPause(): void {
-		(document.getElementById('control-play') as HTMLElement).style.display = 'none';
-		(document.getElementById('control-pause') as HTMLElement).style.display = 'inline';
-	}
-
-	private replaceControlPauseByPlay(): void {
-		(document.getElementById('control-pause') as HTMLElement).style.display = 'none';
-		(document.getElementById('control-play') as HTMLElement).style.display = 'inline';
-	}
-
-	private playNewRoundSound(): void {
-		const audio = document.getElementById('sound-round-new') as HTMLAudioElement;
-		audio.play();
-	}
-
 
 }

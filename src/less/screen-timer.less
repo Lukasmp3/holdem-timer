@@ -83,7 +83,8 @@
             flex-grow: 1;
             flex-basis: 0;
 
-            > svg {
+            // > svg {
+            svg {
                 transform: scale(0.8);
                 cursor: pointer;
                 transition: filter 300ms;
@@ -96,13 +97,32 @@
                 }
             }
 
-            > svg:hover {
+            // > svg:hover {
+            svg:hover {
                 filter: drop-shadow(0 0 0.75rem crimson);
             }
         }
 
-        #control-pause {
-            display: none;
+        #control-play-pause {
+            // Only holder grouping the buttons with screens
+            input { display: none; }
+
+            // TODO; doesn't do anything I guess
+            label {
+                content: "";
+                width: 0px;
+                height: 0px;
+                margin: 0px;
+                padding: 0px;
+            }
+
+            // hide active button
+            #input-control-play:checked ~ #control-play-l,
+            #input-control-pause:checked ~ #control-pause-l
+            {
+                display: none;
+            }
+
         }
 
     }

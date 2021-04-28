@@ -41,10 +41,20 @@ export class Clock {
 
     }
 
+    /**
+     * The main function responsible for updating and rendering of blinds and timers.
+     * If the current level has reached the end, increase the level and playu sound.
+     * If the session is paused, don't update the timers.
+     * 
+     * @param realElapsedTimeMs elapsed times from last iteration 
+     */
     private updateAllTimers(realElapsedTimeMs: number): void {
-        // console.log(`real elapsed time=${realElapsedTimeMs}`)
+        if (this.getCurrentSession().remainingLevelDurationMs <= 0) {
+            this._control.setNextLevel();
+            this._control.playNewRoundSound();
+        }
 
-        if (!this._control.isCurrentlyPaused()) {
+        if (!this._control.isSessionPaused()) {
             this.updateSessionDurations(realElapsedTimeMs);
         }
 
