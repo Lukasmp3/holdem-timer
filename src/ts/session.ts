@@ -9,31 +9,30 @@ export class Session {
 
     private _blindStructure: BlindStructure;
 
-    private _sessionTimeSeconds: number;
+    private _sessionDurationMs: number;
 
-    private _remainingLevelDurationSeconds: number;
+    private _remainingLevelDurationMs: number;
 
 	constructor($blindStructure: BlindStructure) {
 		this._blindStructure = $blindStructure;
-        this._sessionTimeSeconds = 0;
-        this._remainingLevelDurationSeconds = $blindStructure.levelDurationSeconds;
+        this._sessionDurationMs = 0;
+        this._remainingLevelDurationMs = $blindStructure.levelDurationSeconds * 1000;
 	}
 
     public get blindStructure(): BlindStructure {
         return this._blindStructure;
     }
 
-    // TODO: not the best approach -> may not be necessarily precise
-    public increaseSessionTimeBySecond(): void {
-        this._sessionTimeSeconds++;
+    public increaseSessionDuration(durationMs: number): void {
+        this._sessionDurationMs += durationMs;
     }
 
-    public decreaseRemainingLevelDurationBySeconds(): void {
-        this._remainingLevelDurationSeconds--;
+    public decreaseRemainingLevelDuration(durationMs: number): void {
+        this._remainingLevelDurationMs -= durationMs;
     }
 
     public resetRemainingLevelDuration(): void {
-        this._remainingLevelDurationSeconds = this._blindStructure.levelDurationSeconds;
+        this._remainingLevelDurationMs = this._blindStructure.levelDurationSeconds * 1000;
     }
 
     public static initDefalutSession(): Session {
@@ -45,8 +44,8 @@ export class Session {
      * Getter sessionTimeSeconds
      * @return {number}
      */
-	public get sessionTimeSeconds(): number {
-		return this._sessionTimeSeconds;
+	public get sessionDurationMs(): number {
+		return this._sessionDurationMs;
 	}
     
 
@@ -54,8 +53,8 @@ export class Session {
      * Getter remainingLevelDurationSeconds
      * @return {number}
      */
-	public get remainingLevelDurationSeconds(): number {
-		return this._remainingLevelDurationSeconds;
+	public get remainingLevelDurationMs(): number {
+		return this._remainingLevelDurationMs;
 	}
 
 

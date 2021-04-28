@@ -3,7 +3,7 @@ import { SessionHandler } from "./session-handler";
 
 export class Control {
 
-	sessionHandler: SessionHandler;
+	private sessionHandler: SessionHandler;
 
 	constructor(sessionHandler: SessionHandler) {
 		this.sessionHandler = sessionHandler;
@@ -12,6 +12,13 @@ export class Control {
 		this.onClick('control-rewind', () => this.previousLevel());
 		this.onClick('control-forward', () => this.nextLevel());
 		this.onChange('screen-b', () => this.renderTimerScreen());
+	}
+
+	public isCurrentlyPaused(): boolean {
+		console.log('todo')
+		return false;
+		// const control-
+		// TODO: dodelat
 	}
 
 	private getCurrentSession(): Session {return this.sessionHandler.session}
@@ -44,7 +51,7 @@ export class Control {
 	private renderBlindStructure(): void {
 		const blindStructure = this.getCurrentSession().blindStructure;
 		const currentLevel = blindStructure.currentLevel;
-		const currentBlindLevelValues = blindStructure.blindLevels[currentLevel].values;
+		const currentBlindLevelValues = blindStructure.blindLevels[currentLevel-1].values;
 		const blindsValueText = currentBlindLevelValues.small.toString() + '\n' + currentBlindLevelValues.big.toString();
 		this.renderBlindInformation('blinds-value', blindsValueText);
 		this.renderBlindInformation('blinds-round', currentLevel.toString());
@@ -56,15 +63,25 @@ export class Control {
 		blindsValueEl.innerText = value;
 	}
 
+	/**
+	 * Increase level and re-render if changed
+	 */
 	private nextLevel(): void {
 		// TODO: mozna presunout increasCurentLevel do Session
-		this.getCurrentSession().blindStructure.increaseCurrentLevel();
-		this.getCurrentSession().resetRemainingLevelDuration();
-		this.renderBlindStructure();
+		if (this.getCurrentSession().blindStructure.increaseCurrentLevel()) {
+			this.getCurrentSession().resetRemainingLevelDuration();
+			this.renderBlindStructure();
+		}
 	}
 
+	/**
+	 * Decrease level and re-render if changed
+	 */
 	private previousLevel(): void {
-		// TODO dodelat
+		if (this.getCurrentSession().blindStructure.decreaseCurrentLevel()) {
+			this.getCurrentSession().resetRemainingLevelDuration();
+			this.renderBlindStructure();
+		}
 	}
 
 	private onClickPlay(): void {

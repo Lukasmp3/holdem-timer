@@ -1,31 +1,92 @@
+import { SessionHandler } from "./session-handler";
+import { Session } from "./session";
+import { Control } from "./control";
+
 /**
  * Controlls all dynamic clocks on the 'screen-timer'
  */
 export class Clock {
 
-    _sessionStartTime: Date;
+    static UPDATE_INTERVAL_MS: number = 1000;
 
-    constructor() {
-        this._sessionStartTime = new Date();
+    private _sessionHandler: SessionHandler;
+
+    private _control: Control;
+
+    constructor(sessionHandler: SessionHandler, control: Control) {
+        this._sessionHandler = sessionHandler;
+        this._control = control;
+        this.init();
     }
 
-    private getSessionTime(): string {
-        const currentTime = new Date();
-        const sessionTime = new Date(currentTime.getTime() - this._sessionStartTime.getTime());
-        // console.log(sessionTime);
-        const hours = sessionTime.getHours() - 1;   // TODO: check output time
-        // console.log(hours);
-        const minutes = sessionTime.getMinutes();
-        const seconds = sessionTime.getSeconds();
-        return String(hours) + ':' + String(minutes).padStart(2, '0') + ':' + String(seconds).padStart(2, '0');
+    private getCurrentSession(): Session { return this._sessionHandler.session }
+
+    /**
+     * Update all timers and periodically repeat
+     */
+    private init(): void {
+
+        let previousTime = Date.now();
+        let currentTime: number;
+        this.updateAllTimers(0);
+
+        setInterval(() => {
+            currentTime = Date.now();
+            const elapsedTime = currentTime - previousTime;
+            this.updateAllTimers(elapsedTime);
+            previousTime = currentTime;
+        },
+            Clock.UPDATE_INTERVAL_MS
+        );
+
     }
 
-    updateSessionTime(): void {
-        const timeSession = this.getSessionTime();
+    private updateAllTimers(realElapsedTimeMs: number): void {
+        // console.log(`real elapsed time=${realElapsedTimeMs}`)
+
+        if (!this._control.isCurrentlyPaused()) {
+            this.updateSessionDurations(realElapsedTimeMs);
+        }
+
+        this.renderRealTimer();
+        this.renderSessionTimer();
+        this.renderRoundTimer();
+    }
+
+    /**
+     * Update session duration and remaining level duration
+     */
+    private updateSessionDurations(realElapsedTimeMs: number): void {
+        const session = this.getCurrentSession();
+        session.increaseSessionDuration(realElapsedTimeMs);
+        session.decreaseRemainingLevelDuration(realElapsedTimeMs);
+    }
+
+    private renderSessionTimer(): void {
+        const sessionTimeMs = this.getCurrentSession().sessionDurationMs;
+        const sessionTime = Clock.millisToMinutesAndSeconds(sessionTimeMs);
+
         const timeSessionEl = document.querySelector("#time-session-clock") as HTMLInputElement;
-        // timeRealEl.innerText = timeReal;
-        timeSessionEl.textContent = timeSession;
+        timeSessionEl.textContent = sessionTime;
     }
+
+    private renderRoundTimer(): void {
+        const roundTimeMs = this.getCurrentSession().remainingLevelDurationMs;
+        const roundTime = Clock.millisToMinutesAndSeconds(roundTimeMs);
+        const timerRoundEl = document.querySelector('#time-round') as HTMLInputElement;
+        timerRoundEl.textContent = roundTime;
+    }
+
+    /**
+     * Update the real time for element #time-real
+     */
+    private renderRealTimer(): void {
+        const timeReal = Clock.getCurrentTime()
+        const timeRealEl = document.querySelector("#time-real") as HTMLInputElement;
+        // timeRealEl.innerText = timeReal;
+        timeRealEl.textContent = timeReal;
+    }
+
 
     /**
      * Get the current time string and prepend zeros to minute value:
@@ -42,31 +103,17 @@ export class Clock {
     }
 
     /**
-     * Update the real time for element #time-real
+     * TODO: support for hours
+     * Source:
+     *   https://stackoverflow.com/a/21294619/13134499
      */
-    static updateRealTime(): void {
-        const timeReal = Clock.getCurrentTime()
-        const timeRealEl = document.querySelector("#time-real") as HTMLInputElement;
-        // timeRealEl.innerText = timeReal;
-        timeRealEl.textContent = timeReal;
+    private static millisToMinutesAndSeconds(millis: number): string {
+        const minutes = Math.floor(millis / 60000);
+        const seconds = Number(((millis % 60000) / 1000).toFixed(0));
+        return (
+            seconds == 60 ?
+                (minutes + 1) + ":00" :
+                minutes + ":" + (seconds < 10 ? "0" : "") + seconds
+        );
     }
-
-
-
-    /**
-     * Repeatedly update all timers every second
-     */
-    static updateAllTimers(): void {
-        Clock.updateRealTime();
-        setInterval(() => Clock.updateRealTime(), 1000);
-    }
-
 }
-
-const clockSession = new Clock();
-
-// TODO: dummy implementation of session updating
-setInterval(() => clockSession.updateSessionTime(), 1000);
-
-
-

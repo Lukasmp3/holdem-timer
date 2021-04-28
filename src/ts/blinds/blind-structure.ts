@@ -15,16 +15,28 @@ export class BlindStructure {
         this._levelDurationSeconds = levelDurationSeconds;
 	}
 
-    public increaseCurrentLevel(): void {
+    /**
+     * 
+     * @returns true if the level was increased
+     */
+    public increaseCurrentLevel(): boolean {
         if (this.currentLevel < this._blindLevels.length) {
             this._currentLevel++;
+            return true;
         }
+        return false;
     }
 
-    public decreaseCurrentLevel(): void {
+    /**
+     * 
+     * @returns true if the level was decreased
+     */
+    public decreaseCurrentLevel(): boolean {
         if (this.currentLevel > 1) {
             this._currentLevel--;
+            return true;
         }
+        return false;
     }
 
     public static initDefaultBlindLevels(): BlindLevel[] {
