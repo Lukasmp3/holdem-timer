@@ -7,7 +7,7 @@ import { Control } from "./control";
  */
 export class Clock {
 
-    static UPDATE_INTERVAL_MS: number = 1000;
+    static UPDATE_INTERVAL_MS: number = 50;
 
     private _sessionHandler: SessionHandler;
 
@@ -51,10 +51,14 @@ export class Clock {
     private updateAllTimers(realElapsedTimeMs: number): void {
         if (this.getCurrentSession().remainingLevelDurationMs <= 0) {
             this._control.setNextLevel();
-            this._control.playNewRoundSound();
+            this.playNewRoundSound();
         }
 
         if (!this._control.isSessionPaused()) {
+            // If the session just started, play the new round sound
+            if (!this.getCurrentSession().hasStarted) this.playNewRoundSound(); 
+            this.getCurrentSession().hasAlreadyStarted();
+
             this.updateSessionDurations(realElapsedTimeMs);
         }
 
@@ -96,6 +100,11 @@ export class Clock {
         // timeRealEl.innerText = timeReal;
         timeRealEl.textContent = timeReal;
     }
+
+    private playNewRoundSound(): void {
+		const audio = document.getElementById('sound-round-new') as HTMLAudioElement;
+		audio.play();
+	}
 
 
     /**

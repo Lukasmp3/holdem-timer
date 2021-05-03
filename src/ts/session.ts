@@ -13,6 +13,8 @@ export class Session {
 
     private _remainingLevelDurationMs: number;
 
+    private _hasStarted: boolean = false;
+
 	constructor($blindStructure: BlindStructure) {
 		this._blindStructure = $blindStructure;
         this._sessionDurationMs = 0;
@@ -21,6 +23,10 @@ export class Session {
 
     public get blindStructure(): BlindStructure {
         return this._blindStructure;
+    }
+
+    public get hasStarted(): boolean {
+        return this._hasStarted;
     }
 
     public increaseSessionDuration(durationMs: number): void {
@@ -56,6 +62,10 @@ export class Session {
 	public get remainingLevelDurationMs(): number {
 		return this._remainingLevelDurationMs;
 	}
+
+    public hasAlreadyStarted(): void {
+        this._hasStarted = true;
+    }
 
 
 }

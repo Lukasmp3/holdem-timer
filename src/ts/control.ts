@@ -7,8 +7,7 @@ export class Control {
 
 	constructor(sessionHandler: SessionHandler) {
 		this.sessionHandler = sessionHandler;
-		this.onClick('control-play', () => this.playNewRoundSound());
-		this.onClick('control-rewind', () => this.previousLevel());
+		this.onClick('control-rewind', () => this.setPreviousLevel());
 		this.onClick('control-forward', () => this.setNextLevel());
 		this.onChange('screen-b', () => this.renderTimerScreen());
 	}
@@ -22,22 +21,16 @@ export class Control {
 	 * Increase level and re-render if changed
 	 */
 	 public setNextLevel(): void {
-		// TODO: mozna presunout increasCurentLevel do Session
+		// TODO: maybe move increasCurentLevel to Session
 		if (this.getCurrentSession().blindStructure.increaseCurrentLevel()) {
 			this.getCurrentSession().resetRemainingLevelDuration();
 			this.renderBlindStructure();
 		}
 	}
 
-	public playNewRoundSound(): void {
-		const audio = document.getElementById('sound-round-new') as HTMLAudioElement;
-		audio.play();
-	}
-
 	private getCurrentSession(): Session {return this.sessionHandler.session}
 
 	
-	// private static onClick(id: string, cb: () => void) {
 	private onClick(id: string, cb: () => void): void {
 		const el = document.getElementById(id) as HTMLElement;
 		el.addEventListener('click', cb);
@@ -54,11 +47,13 @@ export class Control {
 	}
 
 	/**
-	 * Currently only creates a new defautl session with no settings. 
+	 * Currently creates a new default session with no settings. 
 	 */
 	private initNewSession(): void {
 		console.log('Init new session')
 		this.sessionHandler.session = Session.initDefalutSession();
+		(document.querySelector('#input-control-play') as HTMLInputElement).checked = false;
+		(document.querySelector('#input-control-pause') as HTMLInputElement).checked = true;
 	}
 
 	private renderBlindStructure(): void {
@@ -77,13 +72,12 @@ export class Control {
 	}
 
 	/**
-	 * Decrease level and re-render if changed
+	 * Decrease level and re-render
 	 */
-	private previousLevel(): void {
-		if (this.getCurrentSession().blindStructure.decreaseCurrentLevel()) {
-			this.getCurrentSession().resetRemainingLevelDuration();
-			this.renderBlindStructure();
-		}
+	private setPreviousLevel(): void {
+		this.getCurrentSession().blindStructure.decreaseCurrentLevel();
+		this.getCurrentSession().resetRemainingLevelDuration();
+		this.renderBlindStructure();
 	}
 
 }
