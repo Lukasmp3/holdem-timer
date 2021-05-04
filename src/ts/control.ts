@@ -9,6 +9,7 @@ export class Control {
 		this.sessionHandler = sessionHandler;
 		this.onClick('control-rewind', () => this.setPreviousLevel());
 		this.onClick('control-forward', () => this.setNextLevel());
+		this.onChange('screen-a', () => this.createNewSession());
 		this.onChange('screen-b', () => this.renderTimerScreen());
 	}
 
@@ -41,6 +42,11 @@ export class Control {
 		el.addEventListener('change', cb);
 	}
 
+	private createNewSession(): void {
+		console.log('Create a new session');
+		this.sessionHandler.session = Session.initDefalutSession();
+	}
+
 	private renderTimerScreen(): void {
 		this.initNewSession();
 		this.renderBlindStructure();
@@ -50,8 +56,7 @@ export class Control {
 	 * Currently creates a new default session with no settings. 
 	 */
 	private initNewSession(): void {
-		console.log('Init new session')
-		this.sessionHandler.session = Session.initDefalutSession();
+		console.log('Start the session');
 		(document.querySelector('#input-control-play') as HTMLInputElement).checked = false;
 		(document.querySelector('#input-control-pause') as HTMLInputElement).checked = true;
 	}

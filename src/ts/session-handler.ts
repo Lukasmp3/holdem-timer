@@ -10,6 +10,7 @@ export class SessionHandler {
     private _session: Session;
 
     public constructor() {
+        console.log('Create a new session');
         this._session = Session.initDefalutSession();
     }
 

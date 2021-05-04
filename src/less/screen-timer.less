@@ -92,8 +92,14 @@
             flex-basis: 0;
 
             svg {
-                transform: scale(0.8);
                 cursor: pointer;
+
+                -webkit-transform: scale(0.8);
+                -moz-transform: scale(0.8);
+                -ms-transform: scale(0.8);
+                -o-transform: scale(0.8);
+                transform: scale(0.8);
+
                 transition: filter 300ms, transform 300ms;
 
                 rect {
@@ -107,6 +113,11 @@
             // > svg:hover {
             svg:hover {
                 filter: drop-shadow(0 0 0.75rem lime);
+
+                -webkit-transform: scale(0.85);
+                -moz-transform: scale(0.85);
+                -ms-transform: scale(0.85);
+                -o-transform: scale(0.85);
                 transform: scale(0.85);
             }
         }
@@ -119,9 +130,6 @@
             // background-color: black;
             
             display: flex;
-            // flex-direction: row;
-            // align-items: center;
-            // align-content: center;
             justify-content: center;
 
             // TODO; doesn't do anything I guess
