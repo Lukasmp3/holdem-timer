@@ -31,12 +31,32 @@
 
 
             <div class="screen" id="screen-new-game">
-                <h2>New game</h2>
 
-                <h2>Settings</h2>
+                <!-- <h2>Settings</h2> -->
 
-                <input id="custom-checkbox-input" type="checkbox">
-                <label id="custom-checkbox" for="custom-checkbox-input"></label>
+                <div class="setting-item" id="sound">
+                    <label for="sound-toggle">Sound</label>
+                    <input type="checkbox" id="sound-toggle">    
+                </div>
+
+                <div class="setting-item" id="ante">
+                    <label for="ante-toggle">Ante</label>
+                    <input type="checkbox" id="ante-toggle">    
+                </div>
+
+                <div class="setting-item" id="duration">
+
+                    <label for="duration">Level duration (min)</label>
+                    <select id="duration">
+                        <option value="30">30</option>
+                        <option value="20">20</option>
+                        <option value="15">15</option>
+                        <option value="10" selected>10</option>
+                        <option value="5">5</option>
+                        <option value="3">3</option>
+                        <option value="1">1</option>
+                      </select>
+                </div>
 
 
             </div>

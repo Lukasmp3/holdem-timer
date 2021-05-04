@@ -10,7 +10,7 @@ export class Control {
 		this.onClick('control-rewind', () => this.setPreviousLevel());
 		this.onClick('control-forward', () => this.setNextLevel());
 		this.onChange('screen-a', () => this.createNewSession());
-		this.onChange('screen-b', () => this.renderTimerScreen());
+		this.onChange('screen-b', () => this.runNewSession());
 	}
 
 	public isSessionPaused(): boolean {
@@ -47,18 +47,25 @@ export class Control {
 		this.sessionHandler.session = Session.initDefalutSession();
 	}
 
-	private renderTimerScreen(): void {
+	private runNewSession(): void {
 		this.initNewSession();
+		this.setBlindsStucture();
 		this.renderBlindStructure();
 	}
 
 	/**
-	 * Currently creates a new default session with no settings. 
+	 * Creates a new configured session 
 	 */
 	private initNewSession(): void {
 		console.log('Start the session');
 		(document.querySelector('#input-control-play') as HTMLInputElement).checked = false;
 		(document.querySelector('#input-control-pause') as HTMLInputElement).checked = true;
+	}
+
+	private setBlindsStucture(): void {
+		console.log('here')
+		const levelDuration = (document.getElementById("duration") as HTMLInputElement).value;
+		console.log('duration: ' + levelDuration);
 	}
 
 	private renderBlindStructure(): void {

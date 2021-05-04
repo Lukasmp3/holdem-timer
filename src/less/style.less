@@ -1,9 +1,6 @@
+@import 'variables.less';
 @import 'screen-timer.less';
-
-@background-color-page: rgb(65 80 115);
-@background-color-screens: rgb(#cd920e);
-@font-color-page: whitesmoke;
-@font-size-buttons: 20px;
+@import 'screen-new-game.less';
 
 body {
     font-family: 'Helvetica', 'Arial', sans-serif;
@@ -39,7 +36,7 @@ body {
         flex-grow: 1;
 
         // Only holder grouping the buttons with screens
-        input { display: none; }
+        > input { display: none; }
 
         .screen {
             // padding: 1em;

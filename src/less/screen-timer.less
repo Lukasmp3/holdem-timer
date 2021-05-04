@@ -1,6 +1,4 @@
-@background-color-screens: rgb(#cd920e);
-@background-color-page: rgb(65 80 115);
-
+@import 'variables.less';
 
 #screen-timer {
 
@@ -76,6 +74,7 @@
             .clock {
                 font-size: 100px;
                 text-align: center;
+                font-weight: bold;
             }
         }
 
@@ -106,13 +105,13 @@
                     fill: @background-color-page
                 }
                 polygon {
-                    fill: lime;
+                    fill: violet;
                 }
             }
 
             // > svg:hover {
             svg:hover {
-                filter: drop-shadow(0 0 0.75rem lime);
+                filter: drop-shadow(0 0 0.75rem purple);
 
                 -webkit-transform: scale(0.85);
                 -moz-transform: scale(0.85);

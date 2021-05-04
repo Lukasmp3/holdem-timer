@@ -101,9 +101,18 @@ export class Clock {
         timeRealEl.textContent = timeReal;
     }
 
+    /**
+     * Play the sound if the application isn't muted 
+     */
     private playNewRoundSound(): void {
-		const audio = document.getElementById('sound-round-new') as HTMLAudioElement;
-		audio.play();
+        const isMuted = !(document.getElementById('sound-toggle') as HTMLInputElement).checked;
+        if (isMuted) {
+            return;
+        } else {
+            const audio = document.getElementById('sound-round-new') as HTMLAudioElement;
+            audio.play();
+        }
+		
 	}
 
 
