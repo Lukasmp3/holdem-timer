@@ -7,7 +7,7 @@ import { Control } from "./control";
  */
 export class Clock {
 
-    static UPDATE_INTERVAL_MS: number = 50;
+    private static UPDATE_INTERVAL_MS: number = 1000;
 
     private _sessionHandler: SessionHandler;
 

@@ -1,4 +1,6 @@
 @background-color-screens: rgb(#cd920e);
+@background-color-page: rgb(65 80 115);
+
 
 #screen-timer {
 
@@ -7,11 +9,11 @@
     justify-content: space-between;
 
     #time-global {
-        background-color:darkorchid;
+        // background-color:darkorchid;
         height: 80 px;
         display: flex;
         justify-content: space-between;
-        font-size: 25px;
+        font-size: 30px;
 
         > * {
             margin: 15px;
@@ -26,7 +28,6 @@
     }
     
     #info-round {
-        background-color: brown;
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -37,6 +38,7 @@
             display: flex;
             text-align: center;
             flex-grow: 1;
+            flex-wrap: wrap-reverse;
 
             > * {
                 flex-grow: 1;
@@ -46,16 +48,21 @@
                 align-items: center;
             }
 
+            // > #round  {
+            //   // put 'blinds' and 'ante' closer to clocks
+            //   order: 1;  
+            // }
+
             .box {
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 border-radius: 25px;
-                background: salmon;
+                background: lightslategrey;
                 padding: 20px; 
                 width: 200px;
                 height: 200px;
-                font-size: 50px;
+                font-size: 70px;
             }
         }
 
@@ -63,11 +70,11 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            background-color: cornflowerblue;
+            // background-color: cornflowerblue;
             height: 150px;
 
             .clock {
-                font-size: 80px;
+                font-size: 100px;
                 text-align: center;
             }
         }
@@ -77,7 +84,6 @@
     #control {
         display: flex;
         justify-content: space-between;
-        background-color: green;
         height: 200px;
         text-align: center;
 
@@ -85,14 +91,13 @@
             flex-grow: 1;
             flex-basis: 0;
 
-            // > svg {
             svg {
                 transform: scale(0.8);
                 cursor: pointer;
-                transition: filter 300ms;
+                transition: filter 300ms, transform 300ms;
 
                 rect {
-                    fill: purple;
+                    fill: @background-color-page
                 }
                 polygon {
                     fill: lime;
@@ -101,7 +106,8 @@
 
             // > svg:hover {
             svg:hover {
-                filter: drop-shadow(0 0 0.75rem crimson);
+                filter: drop-shadow(0 0 0.75rem lime);
+                transform: scale(0.85);
             }
         }
 
@@ -161,5 +167,12 @@
             // }
         }
 
+    }
+}
+
+@media (max-width: 736px) {
+    #round {
+        // put 'blinds' and 'ante' closer to clocks
+        order: 1;  
     }
 }
