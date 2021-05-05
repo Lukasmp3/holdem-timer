@@ -9,7 +9,7 @@ export class Control {
 		this.sessionHandler = sessionHandler;
 		this.onClick('control-rewind', () => this.setPreviousLevel());
 		this.onClick('control-forward', () => this.setNextLevel());
-		this.onChange('screen-a', () => this.createNewSession());
+		this.onChange('screen-a', () => this.initDefaultSession());
 		this.onChange('screen-b', () => this.runNewSession());
 	}
 
@@ -22,7 +22,6 @@ export class Control {
 	 * Increase level and re-render if changed
 	 */
 	 public setNextLevel(): void {
-		// TODO: maybe move increasCurentLevel to Session
 		if (this.getCurrentSession().blindStructure.increaseCurrentLevel()) {
 			this.getCurrentSession().resetRemainingLevelDuration();
 			this.renderBlindStructure();
@@ -42,30 +41,41 @@ export class Control {
 		el.addEventListener('change', cb);
 	}
 
-	private createNewSession(): void {
-		console.log('Create a new session');
-		this.sessionHandler.session = Session.initDefalutSession();
+	private initDefaultSession(): void {
+		console.log('Init default session');
+		this.sessionHandler.session = Session.initDefaultSession();
 	}
 
 	private runNewSession(): void {
-		this.initNewSession();
 		this.setBlindsStucture();
+		this.renderNewSession();
 		this.renderBlindStructure();
+	}
+
+	private setBlindsStucture(): void {
+		const anteIsEnabled = (document.getElementById("ante-toggle") as HTMLInputElement).checked;
+		if (anteIsEnabled) {
+			this.sessionHandler.session = Session.initDefaultSessionWithAnte();
+		}
+		else {
+			this.sessionHandler.session = Session.initDefaultSession();
+		}
+
+		const levelDuration = (document.getElementById("duration-option") as HTMLInputElement).value;
+		console.log('Create a new blind structure with level duration=' + levelDuration);
+		this.getCurrentSession().blindStructure.levelDurationSeconds = 60 * Number(levelDuration);
+
+		
+		this.getCurrentSession().resetRemainingLevelDuration();
 	}
 
 	/**
 	 * Creates a new configured session 
 	 */
-	private initNewSession(): void {
+	private renderNewSession(): void {
 		console.log('Start the session');
 		(document.querySelector('#input-control-play') as HTMLInputElement).checked = false;
 		(document.querySelector('#input-control-pause') as HTMLInputElement).checked = true;
-	}
-
-	private setBlindsStucture(): void {
-		console.log('here')
-		const levelDuration = (document.getElementById("duration") as HTMLInputElement).value;
-		console.log('duration: ' + levelDuration);
 	}
 
 	private renderBlindStructure(): void {

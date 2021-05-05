@@ -87,6 +87,7 @@ export class Clock {
     private renderRoundTimer(): void {
         const roundTimeMs = this.getCurrentSession().remainingLevelDurationMs;
         const roundTime = Clock.millisToMinutesAndSeconds(roundTimeMs);
+        // console.log('Round time=' + roundTime)
         const timerRoundEl = document.querySelector('#time-round') as HTMLInputElement;
         timerRoundEl.textContent = roundTime;
     }

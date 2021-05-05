@@ -41,8 +41,12 @@ export class Session {
         this._remainingLevelDurationMs = this._blindStructure.levelDurationSeconds * 1000;
     }
 
-    public static initDefalutSession(): Session {
-        return new Session(new BlindStructure(BlindStructure.initDefaultBlindLevels()));
+    public static initDefaultSession(): Session {
+        return new Session(new BlindStructure(BlindStructure.initDefaultBlindLevelsWithoutAnte()));
+    }
+
+    public static initDefaultSessionWithAnte(): Session {
+        return new Session(new BlindStructure(BlindStructure.initDefaultBlindLevelsWithAnte()));
     }
 
 

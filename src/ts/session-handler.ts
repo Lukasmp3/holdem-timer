@@ -11,7 +11,7 @@ export class SessionHandler {
 
     public constructor() {
         console.log('Create a new session');
-        this._session = Session.initDefalutSession();
+        this._session = Session.initDefaultSession();
     }
 
     public set session(session: Session) {
