@@ -11,6 +11,7 @@ yarn start
 ```
 
 Run tests:
+
 ```bash
 yarn jest
 ```
@@ -18,7 +19,7 @@ yarn jest
 ## Technologies
 
 TypeScript  
-less.js
+less.js  
 ts-jest
 
 ## Functions
