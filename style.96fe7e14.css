@@ -1,0 +1,226 @@
+#screen-timer {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+#screen-timer #time-global {
+  height: 80 px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 30px;
+}
+#screen-timer #time-global > * {
+  margin: 15px;
+}
+#screen-timer #time-global #time-session {
+  display: flex;
+}
+#screen-timer #time-global #time-session label {
+  margin-right: 5px;
+}
+#screen-timer #info-round {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  flex-grow: 1;
+}
+#screen-timer #info-round #blinds {
+  display: flex;
+  text-align: center;
+  flex-grow: 1;
+  flex-wrap: wrap-reverse;
+}
+#screen-timer #info-round #blinds > * {
+  flex-grow: 1;
+  flex-basis: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#screen-timer #info-round #blinds .box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 25px;
+  background: lightslategrey;
+  padding: 20px;
+  width: 200px;
+  height: 200px;
+  font-size: 70px;
+}
+#screen-timer #info-round #time-round-wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  height: 150px;
+}
+#screen-timer #info-round #time-round-wrap .clock {
+  font-size: 100px;
+  text-align: center;
+  font-weight: bold;
+}
+#screen-timer #control {
+  display: flex;
+  justify-content: space-between;
+  height: 200px;
+  text-align: center;
+}
+#screen-timer #control > * {
+  flex-grow: 1;
+  flex-basis: 0;
+}
+#screen-timer #control > * svg {
+  cursor: pointer;
+  -webkit-transform: scale(0.8);
+  -moz-transform: scale(0.8);
+  -ms-transform: scale(0.8);
+  -o-transform: scale(0.8);
+  transform: scale(0.8);
+  transition: filter 300ms, transform 300ms;
+}
+#screen-timer #control > * svg rect {
+  fill: #415073;
+}
+#screen-timer #control > * svg polygon {
+  fill: violet;
+}
+#screen-timer #control > * svg:hover {
+  filter: drop-shadow(0 0 0.75rem purple);
+  -webkit-transform: scale(0.85);
+  -moz-transform: scale(0.85);
+  -ms-transform: scale(0.85);
+  -o-transform: scale(0.85);
+  transform: scale(0.85);
+}
+#screen-timer #control #control-play-pause {
+  display: flex;
+  justify-content: center;
+}
+#screen-timer #control #control-play-pause input {
+  display: none;
+}
+#screen-timer #control #control-play-pause label {
+  display: flex;
+}
+#screen-timer #control #control-play-pause #input-control-play:checked ~ #control-play-l,
+#screen-timer #control #control-play-pause #input-control-pause:checked ~ #control-pause-l {
+  display: none;
+}
+@media (max-width: 736px) {
+  #round {
+    order: 1;
+  }
+}
+#screen-new-game {
+  display: flex;
+  flex-direction: column;
+  font-size: 40px;
+}
+#screen-new-game > .setting-item {
+  height: 100px;
+  margin: 25px;
+  border-bottom: 5px solid #415073;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#screen-new-game > .setting-item input[type=checkbox] {
+  transform: scale(3);
+}
+#screen-new-game > .setting-item select {
+  transform: scale(2);
+  margin-right: 15px;
+}
+#screen-new-game > .setting-item select > option {
+  font-size: 30px;
+  padding: 5px;
+  background: lightblue;
+}
+body {
+  font-family: 'Helvetica', 'Arial', sans-serif;
+  color: whitesmoke;
+  margin: 0;
+  background-color: #415073;
+}
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+.page-wrapper header {
+  display: flex;
+  flex-grow: 0.5;
+  background-color: #415073;
+  margin: 5px;
+  font-size: 30px;
+  width: 100%;
+  max-height: 70px;
+  justify-content: center;
+  align-items: center;
+}
+.page-wrapper page {
+  display: flex;
+  flex-direction: column;
+  min-height: 700px;
+  flex-grow: 1;
+}
+.page-wrapper page > input {
+  display: none;
+}
+.page-wrapper page .screen {
+  padding: 0;
+  flex-grow: 1;
+  background-color: #cd920e;
+}
+.page-wrapper page #nav-screens {
+  display: flex;
+  background-color: #4b4b4b;
+}
+.page-wrapper page #nav-screens label {
+  flex-grow: 1;
+  flex-basis: 0;
+  cursor: pointer;
+  text-align: center;
+  font-size: 20px;
+  color: whitesmoke;
+  line-height: 50px;
+  transition: background-color 1000ms;
+}
+.page-wrapper page label:hover,
+.page-wrapper page #screen-a:checked ~ #nav-screens [for=screen-a],
+.page-wrapper page #screen-b:checked ~ #nav-screens [for=screen-b] {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+.page-wrapper page #screen-a:not(:checked) ~ #screen-new-game,
+.page-wrapper page #screen-b:not(:checked) ~ #screen-timer {
+  display: none;
+}
+.page-wrapper footer {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 0.5;
+  background-color: #415073;
+  width: 100%;
+  max-height: 100px;
+  justify-content: center;
+  align-content: center;
+  align-items: center;
+}
+.page-wrapper footer p {
+  margin: 5px;
+}
+.page-wrapper footer p a {
+  color: #cd920e;
+}
+.page-wrapper footer p a:hover {
+  color: yellow;
+}
+@media (min-width: 900px) {
+  body {
+    width: 900px;
+    margin: auto;
+  }
+}
+
+
+/*# sourceMappingURL=/style.96fe7e14.css.map */
