@@ -1,0 +1,185 @@
+@import 'variables.less';
+
+#screen-timer {
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    #time-global {
+        // background-color:darkorchid;
+        height: 80 px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 30px;
+
+        > * {
+            margin: 15px;
+        }
+
+        #time-session {
+            display: flex;
+
+            label {margin-right: 5px;}
+        }
+
+    }
+    
+    #info-round {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex-grow: 1;
+        
+
+        #blinds {
+            display: flex;
+            text-align: center;
+            flex-grow: 1;
+            flex-wrap: wrap-reverse;
+
+            > * {
+                flex-grow: 1;
+                flex-basis: 0;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+            }
+
+            // > #round  {
+            //   // put 'blinds' and 'ante' closer to clocks
+            //   order: 1;  
+            // }
+
+            .box {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 25px;
+                background: lightslategrey;
+                padding: 20px; 
+                width: 200px;
+                height: 200px;
+                font-size: 70px;
+            }
+        }
+
+        #time-round-wrap {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            // background-color: cornflowerblue;
+            height: 150px;
+
+            .clock {
+                font-size: 100px;
+                text-align: center;
+                font-weight: bold;
+            }
+        }
+
+    }
+    
+    #control {
+        display: flex;
+        justify-content: space-between;
+        height: 200px;
+        text-align: center;
+
+        > * {
+            flex-grow: 1;
+            flex-basis: 0;
+
+            svg {
+                cursor: pointer;
+
+                -webkit-transform: scale(0.8);
+                -moz-transform: scale(0.8);
+                -ms-transform: scale(0.8);
+                -o-transform: scale(0.8);
+                transform: scale(0.8);
+
+                transition: filter 300ms, transform 300ms;
+
+                rect {
+                    fill: @background-color-page
+                }
+                polygon {
+                    fill: violet;
+                }
+            }
+
+            // > svg:hover {
+            svg:hover {
+                filter: drop-shadow(0 0 0.75rem purple);
+
+                -webkit-transform: scale(0.85);
+                -moz-transform: scale(0.85);
+                -ms-transform: scale(0.85);
+                -o-transform: scale(0.85);
+                transform: scale(0.85);
+            }
+        }
+
+        #control-play-pause {
+            // Only holder grouping the buttons with screens
+            input { display: none; }
+
+            // For some reason it helps
+            // background-color: black;
+            
+            display: flex;
+            justify-content: center;
+
+            // TODO; doesn't do anything I guess
+            label {
+                // background-color: black;
+                // content: "";
+                // width: 0px;
+                // width: 200px;
+                // height: 0px;
+                // height: 200px;
+                // margin: 0px;
+                // padding: 0px;
+                // display: inline-block;
+                // display: block;
+
+                display: flex;
+
+                // svg {
+                //     display: block;
+                //     margin: auto;
+                //     flex-grow: 1;
+                //     flex-basis: 0;
+                // }
+            }
+
+            // hide active button
+            #input-control-play:checked ~ #control-play-l,
+            #input-control-pause:checked ~ #control-pause-l
+            {
+                display: none;
+            }
+
+            // #control-pause-l {
+            //     width: 160px;
+            //     // width: 0px;
+            //     height: 160px;
+            //     // height: 0px;
+            // }
+    
+            // #control-play-l {
+            //     width: 160px;
+            //     height: 160px;
+            // }
+        }
+
+    }
+}
+
+@media (max-width: 736px) {
+    #round {
+        // put 'blinds' and 'ante' closer to clocks
+        order: 1;  
+    }
+}

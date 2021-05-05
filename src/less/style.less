@@ -1,20 +1,30 @@
-@background-page: lightblue;
-@font-size-buttons: 20px;
+@import 'variables.less';
+@import 'screen-timer.less';
+@import 'screen-new-game.less';
 
 body {
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    color: whitesmoke;
     margin: 0;
+    background-color: @background-color-page;
 }
 
 .page-wrapper {
+
+    min-height: 100vh;
 
     display: flex;
     flex-direction: column;
 
     header {
         display: flex;
-        background: @background-page;
+        flex-grow: 0.5;
+
+        background-color: @background-color-page;
+        margin: 5px;
+        font-size: 30px;
         width: 100%;
-        height: 50px;
+        max-height: 70px;
         justify-content: center;
         align-items: center;
     }
@@ -22,46 +32,80 @@ body {
     page {
         display: flex;
         flex-direction: column;
+        min-height: 700px;
+        flex-grow: 1;
 
-        // #page-nav ol {
-        //     display: flex;
-        //     flex-direction: row;
-        // }
-        #page-nav {
-            display: flex;
-            justify-content: space-between;
-            flex-direction: row;
-            height: 100px;
-            width: 100%;
-            align-items: stretch;
-        }
+        // Only holder grouping the buttons with screens
+        > input { display: none; }
 
-
-        #page-nav button {
-            background-color: lightgreen;
+        .screen {
+            // padding: 1em;
+            padding: 0;
             flex-grow: 1;
-            flex-basis: 0;
-            cursor: pointer;
-            color: white;
-            padding: 0px 10px;
-            text-align: center;
-            text-decoration: none;
-            font-size: @font-size-buttons;
+            background-color: @background-color-screens;
         }
+
+        #nav-screens {
+            display: flex;
+            background-color: rgb(75, 75, 75);
+
+            label {
+                flex-grow: 1;
+                flex-basis: 0;
+                cursor: pointer;
+                text-align: center;
+                font-size: @font-size-buttons;
+                color: whitesmoke;
+                line-height: 50px;
+                transition: background-color 1000ms;
+            }
+        }
+
+
+        // hover over nav-screens items will change color
+        label:hover,
+        #screen-a:checked ~ #nav-screens [for=screen-a],
+        #screen-b:checked ~ #nav-screens [for=screen-b]
+        // ,#screen-c:checked ~ #nav-screens [for=screen-c]
+        {
+            background-color: rgba(255, 255, 255, 0.3);
+        }
+
+        // hide unactive screens
+        #screen-a:not(:checked) ~ #screen-new-game, #screen-b:not(:checked) ~ #screen-timer {
+            display: none;
+        }
+        
     }
 
     footer {
         display: flex;
         flex-direction: column;
-        background: @background-page;
+        flex-grow: 0.5;
+        background-color: @background-color-page;
         width: 100%;
-        height: 100px;
+        max-height: 100px;
         justify-content: center;
         align-content: center;
         align-items: center;
 
         p {
             margin: 5px;
+
+            a {
+                color: @background-color-screens;
+            }
+            a:hover {
+                color: yellow;
+            }
         }
     }
 }
+
+@media (min-width: 900px) {
+    body {
+        width: 900px;
+        margin: auto;
+    }
+}
+
