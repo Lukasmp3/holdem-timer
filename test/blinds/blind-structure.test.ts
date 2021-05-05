@@ -8,7 +8,7 @@ const twoLevelsStructure = new BlindStructure([
 ])
 
 test('Init default blind structure', () => {
-    const defaultStructure = BlindStructure.initDefaultBlindLevels();
+    const defaultStructure = BlindStructure.initDefaultBlindLevelsWithoutAnte();
     const structure = new BlindStructure(defaultStructure);
     expect(structure.blindLevels.length).toBe(12);
     expect(structure.blindLevels[0].level).toBe(1);

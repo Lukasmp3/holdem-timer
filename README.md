@@ -5,10 +5,14 @@ This project is my first JS app. The aim is to familiarize me with the JS enviro
 ## Build and start
 
 ```bash
-yarn jest
 tsc
 lessc src/less/style.less dist/style.css
 yarn start
+```
+
+Run tests:
+```bash
+yarn jest
 ```
 
 ## Technologies
@@ -27,6 +31,6 @@ Testing (ts-jest)
 SVG buttons
 Audio
 Transitions, transformations
-Flexboxes
+Flexbox
 ...
 ```
