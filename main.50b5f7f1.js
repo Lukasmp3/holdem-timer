@@ -249,8 +249,9 @@ var Clock = /*#__PURE__*/function () {
       if (isMuted) {
         return;
       } else {
-        var audio = document.getElementById('sound-round-new');
-        audio.play();
+        var soundToPlay = this._control.getCustomSound() || document.getElementById('sound-round-new'); // const audio = document.getElementById('sound-round-new') as HTMLAudioElement;
+
+        soundToPlay.play();
       }
     }
     /**
@@ -302,6 +303,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.BlindLevel = void 0;
+/**
+ * Representation of one blind level.
+ */
 
 var BlindLevel = /*#__PURE__*/function () {
   /**
@@ -343,6 +347,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.BlindValues = void 0;
+/**
+ * Values of one blind level.
+ */
 
 var BlindValues = /*#__PURE__*/function () {
   /**
@@ -396,6 +403,10 @@ exports.BlindStructure = void 0;
 var blind_level_1 = require("./blind-level");
 
 var blind_values_1 = require("./blind-values");
+/**
+ * The entire blind structure for configured session.
+ */
+
 
 var BlindStructure = /*#__PURE__*/function () {
   function BlindStructure(blindLevels) {
@@ -585,6 +596,10 @@ Object.defineProperty(exports, "__esModule", {
 exports.Control = void 0;
 
 var session_1 = require("./session");
+/**
+ * Responsible for all buttons and controllers in the application.
+ */
+
 
 var Control = /*#__PURE__*/function () {
   function Control(sessionHandler) {
@@ -592,7 +607,9 @@ var Control = /*#__PURE__*/function () {
 
     _classCallCheck(this, Control);
 
-    this.sessionHandler = sessionHandler;
+    this._sessionHandler = sessionHandler;
+    this._customSound = null;
+    console.log('ima heree');
     this.onClick('control-rewind', function () {
       return _this.setPreviousLevel();
     });
@@ -605,6 +622,7 @@ var Control = /*#__PURE__*/function () {
     this.onChange('screen-b', function () {
       return _this.runNewSession();
     });
+    this.listenForDndSounds();
   }
 
   _createClass(Control, [{
@@ -626,9 +644,14 @@ var Control = /*#__PURE__*/function () {
       }
     }
   }, {
+    key: "getCustomSound",
+    value: function getCustomSound() {
+      return this._customSound;
+    }
+  }, {
     key: "getCurrentSession",
     value: function getCurrentSession() {
-      return this.sessionHandler.session;
+      return this._sessionHandler.session;
     }
   }, {
     key: "onClick",
@@ -646,7 +669,7 @@ var Control = /*#__PURE__*/function () {
     key: "initDefaultSession",
     value: function initDefaultSession() {
       console.log('Init default session');
-      this.sessionHandler.session = session_1.Session.initDefaultSession();
+      this._sessionHandler.session = session_1.Session.initDefaultSession();
     }
   }, {
     key: "runNewSession",
@@ -661,9 +684,9 @@ var Control = /*#__PURE__*/function () {
       var anteIsEnabled = document.getElementById("ante-toggle").checked;
 
       if (anteIsEnabled) {
-        this.sessionHandler.session = session_1.Session.initDefaultSessionWithAnte();
+        this._sessionHandler.session = session_1.Session.initDefaultSessionWithAnte();
       } else {
-        this.sessionHandler.session = session_1.Session.initDefaultSession();
+        this._sessionHandler.session = session_1.Session.initDefaultSession();
       }
 
       var levelDuration = document.getElementById("duration-option").value;
@@ -710,6 +733,46 @@ var Control = /*#__PURE__*/function () {
       this.getCurrentSession().resetRemainingLevelDuration();
       this.renderBlindStructure();
     }
+  }, {
+    key: "listenForDndSounds",
+    value: function listenForDndSounds() {
+      var _this2 = this;
+
+      var dnd = document.querySelector("#sound-custom-dnd");
+      dnd.addEventListener('dragover', function (x) {
+        return _this2.onDragOver(x);
+      });
+      dnd.addEventListener('drop', function (x) {
+        return _this2.onDrop(x);
+      });
+    }
+  }, {
+    key: "onDragOver",
+    value: function onDragOver(e) {
+      e.preventDefault();
+    }
+  }, {
+    key: "onDrop",
+    value: function onDrop(e) {
+      var _this3 = this;
+
+      e.preventDefault();
+      var files = e.dataTransfer.files;
+      var file = files[0];
+      console.log('Loaded file with name=' + file.name);
+      if (!file.type.includes('audio')) return;
+      var fr = new FileReader();
+      fr.addEventListener('load', function (e) {
+        var _a; // const audio = new Audio();
+
+
+        var audioInfo = document.querySelector("#sound-custom-info");
+        audioInfo.innerText = "Loaded:\n" + file.name.substring(0, 50);
+        var soundContent = (_a = e.target) === null || _a === void 0 ? void 0 : _a.result;
+        _this3._customSound = new Audio(soundContent);
+      });
+      fr.readAsDataURL(file);
+    }
   }]);
 
   return Control;
@@ -732,9 +795,9 @@ exports.SessionHandler = void 0;
 
 var session_1 = require("./session");
 /**
- * Dummy implementation of session handler
+ * Implementation of session handler
  *
- * TODO: Only one session shoudl exist at one time (singleton)
+ * TODO: Only one session should exist at one time (singleton)
  */
 
 
@@ -772,6 +835,10 @@ var clock_1 = require("./clock");
 var control_1 = require("./control");
 
 var session_handler_1 = require("./session-handler");
+/**
+ * The entry point of the app.
+ */
+
 
 function init() {
   var sessionHandler = new session_handler_1.SessionHandler();
@@ -810,7 +877,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "44211" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "43867" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

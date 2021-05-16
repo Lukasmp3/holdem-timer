@@ -136,6 +136,28 @@
   padding: 5px;
   background: lightblue;
 }
+#screen-new-game > .setting-item .dnd {
+  height: 80px;
+  border-radius: 40px;
+  border: 7px dotted #415073;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #415073;
+}
+#screen-new-game > .setting-item #sound-custom-info {
+  text-align: center;
+  padding: 10px;
+  font-size: 20px;
+}
+#screen-new-game > .setting-item #sound-custom-dnd::before {
+  content: "D'n'D custom sound!";
+  text-align: center;
+}
+#screen-new-game #sound-custom > * {
+  flex-grow: 1;
+  flex-basis: 0;
+}
 body {
   font-family: 'Helvetica', 'Arial', sans-serif;
   color: whitesmoke;

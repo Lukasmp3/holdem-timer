@@ -1,6 +1,9 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BlindLevel = void 0;
+/**
+ * Representation of one blind level.
+ */
 class BlindLevel {
     /**
      * If not specified ante is 0.

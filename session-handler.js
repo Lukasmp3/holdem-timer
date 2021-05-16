@@ -3,9 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SessionHandler = void 0;
 const session_1 = require("./session");
 /**
- * Dummy implementation of session handler
+ * Implementation of session handler
  *
- * TODO: Only one session shoudl exist at one time (singleton)
+ * TODO: Only one session should exist at one time (singleton)
  */
 class SessionHandler {
     constructor() {

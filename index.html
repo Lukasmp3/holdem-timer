@@ -4,10 +4,10 @@
 <head>
     <meta charset="utf-8">
     <title>Holdem Timer</title>
-    <script src="main.ac527df1.js"></script>
-    <script src="clock.6d5890f2.js"></script>
-    <script src="control.bbda51e4.js"></script>
-    <link rel="stylesheet" href="style.3861ae23.css" type="text/css">
+    <script src="main.f214db27.js"></script>
+    <script src="clock.af6f444c.js"></script>
+    <script src="control.84da5530.js"></script>
+    <link rel="stylesheet" href="style.ff1ee61e.css" type="text/css">
 </head>
 
 <body>
@@ -17,26 +17,29 @@
 
         <page>
 
-            <!-- <input type=radio name=x id=screen-a checked /> -->
             <input type="radio" name="nav" id="screen-a" checked="">
             <input type="radio" name="nav" id="screen-b">
-            <!-- <input type=radio name=x id=screen-c /> -->
 
             <nav id="nav-screens">
                 <label for="screen-a">New game</label>
                 <label for="screen-b">Timer</label>
-                <!-- <label for=screen-c>Settings</label> -->
             </nav>
-            <!-- <span></span> -->
-
 
             <div class="screen" id="screen-new-game">
 
-                <!-- <h2>Settings</h2> -->
-
                 <div class="setting-item" id="sound">
-                    <label for="sound-toggle">Sound</label>
-                    <input type="checkbox" id="sound-toggle">    
+                    <!-- <div id="sound-default"> -->
+                        <label for="sound-toggle">Sound</label>
+                        <input type="checkbox" id="sound-toggle">
+                    <!-- </div> -->
+                    <!-- <div id="sound-custom">
+                        <div id="sound-custom-dnd"></div>
+                    </div> -->
+                </div>
+
+                <div class="setting-item" id="sound-custom">
+                    <div class="dnd" id="sound-custom-dnd"></div>
+                    <div id="sound-custom-info"></div>
                 </div>
 
                 <div class="setting-item" id="ante">
@@ -99,7 +102,7 @@
 
                     <div id="control-play-pause">
                         <audio id="sound-round-new">
-                            <source src="round-new.e27ecaa3.mp3" type="audio/mpeg">
+                            <source src="round-new.55e1703d.mp3" type="audio/mpeg">
                             Your browser does not support the audio element.
                         </audio>
 
@@ -118,16 +121,6 @@
                                 <polygon points="120,40 150,40 150,160 120,160"></polygon>
                             </svg>
                         </label>
-                        
-                        <!-- <svg id="control-play" height="200" width="200">
-                            <rect width="200" height="200" rx="15" />
-                            <polygon points="30,20 180,100 30,180" />
-                        </svg> -->
-                        <!-- <svg id="control-pause" height="200" width="200">
-                            <rect width="200" height="200" rx="15" />
-                            <polygon points="50,40 80,40 80,160 50,160" />
-                            <polygon points="120,40 150,40 150,160 120,160" />
-                        </svg> -->
                     </div>
 
                     <div id="control-forward">
@@ -139,12 +132,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- <div class="screen" id="screen-settings">
-                <label id="menu-control" for="menu-control-input">Menu</label><input type="checkbox"
-                    id="menu-control-input" />
-
-            </div> -->
 
         </page>
 

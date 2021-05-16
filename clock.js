@@ -87,8 +87,9 @@ class Clock {
             return;
         }
         else {
-            const audio = document.getElementById('sound-round-new');
-            audio.play();
+            const soundToPlay = this._control.getCustomSound() || document.getElementById('sound-round-new');
+            // const audio = document.getElementById('sound-round-new') as HTMLAudioElement;
+            soundToPlay.play();
         }
     }
     /**

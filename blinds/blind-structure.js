@@ -3,6 +3,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.BlindStructure = void 0;
 const blind_level_1 = require("./blind-level");
 const blind_values_1 = require("./blind-values");
+/**
+ * The entire blind structure for configured session.
+ */
 class BlindStructure {
     constructor(blindLevels, levelDurationSeconds = 600) {
         this._blindLevels = blindLevels;
