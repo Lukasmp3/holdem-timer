@@ -32,6 +32,34 @@
             }
 
         }
+
+        .dnd {
+            height: 80px;
+			border-radius: 40px;
+			border: 7px dotted @background-color-page;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+            color: @background-color-page;
+        }
+
+        #sound-custom-info {
+            
+            text-align: center;
+            padding: 10px;
+            font-size: 20px;
+        }
+
+        #sound-custom-dnd::before {
+			content: "D'n'D custom sound!";
+            text-align: center;
+		}
+
+    }
+
+    #sound-custom > * {
+        flex-grow: 1;
+        flex-basis: 0;
     }
 
 }

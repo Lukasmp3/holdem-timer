@@ -1,6 +1,9 @@
 import {BlindLevel} from './blind-level';
 import {BlindValues} from './blind-values';
 
+/**
+ * The entire blind structure for configured session.
+ */
 export class BlindStructure {
 
     private _blindLevels: BlindLevel[];

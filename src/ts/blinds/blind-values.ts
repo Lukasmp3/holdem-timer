@@ -1,3 +1,6 @@
+/**
+ * Values of one blind level.
+ */
 export class BlindValues {
 
     private _small: number;

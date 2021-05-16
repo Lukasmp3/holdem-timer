@@ -1,5 +1,8 @@
 import {BlindValues} from './blind-values';
 
+/**
+ * Representation of one blind level.
+ */
 export class BlindLevel {
 
     private _level: number;
