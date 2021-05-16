@@ -1,6 +1,9 @@
 import { Session } from "./session";
 import { SessionHandler } from "./session-handler";
 
+/**
+ * Responsible for all buttons and controllers in the application.
+ */
 export class Control {
 
 	private _sessionHandler: SessionHandler;
@@ -9,7 +12,6 @@ export class Control {
 
 	constructor(sessionHandler: SessionHandler) {
 		this._sessionHandler = sessionHandler;
-		// this._customSound = '';
 		this._customSound = null;
 		console.log('ima heree')
 		this.onClick('control-rewind', () => this.setPreviousLevel());
