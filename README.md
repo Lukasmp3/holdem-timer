@@ -33,5 +33,7 @@ SVG buttons
 Audio
 Transitions, transformations
 Flexbox
+Drag'n'drop API
+File API
 ...
 ```

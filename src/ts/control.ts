@@ -3,14 +3,20 @@ import { SessionHandler } from "./session-handler";
 
 export class Control {
 
-	private sessionHandler: SessionHandler;
+	private _sessionHandler: SessionHandler;
+
+	private _customSound: (HTMLAudioElement | null);
 
 	constructor(sessionHandler: SessionHandler) {
-		this.sessionHandler = sessionHandler;
+		this._sessionHandler = sessionHandler;
+		// this._customSound = '';
+		this._customSound = null;
+		console.log('ima heree')
 		this.onClick('control-rewind', () => this.setPreviousLevel());
 		this.onClick('control-forward', () => this.setNextLevel());
 		this.onChange('screen-a', () => this.initDefaultSession());
 		this.onChange('screen-b', () => this.runNewSession());
+		this.listenForDndSounds();
 	}
 
 	public isSessionPaused(): boolean {
@@ -21,14 +27,18 @@ export class Control {
 	/**
 	 * Increase level and re-render if changed
 	 */
-	 public setNextLevel(): void {
+	public setNextLevel(): void {
 		if (this.getCurrentSession().blindStructure.increaseCurrentLevel()) {
 			this.getCurrentSession().resetRemainingLevelDuration();
 			this.renderBlindStructure();
 		}
 	}
 
-	private getCurrentSession(): Session {return this.sessionHandler.session}
+	public getCustomSound(): (HTMLAudioElement | null) {
+		return this._customSound;
+    }
+
+	private getCurrentSession(): Session {return this._sessionHandler.session}
 
 	
 	private onClick(id: string, cb: () => void): void {
@@ -43,7 +53,7 @@ export class Control {
 
 	private initDefaultSession(): void {
 		console.log('Init default session');
-		this.sessionHandler.session = Session.initDefaultSession();
+		this._sessionHandler.session = Session.initDefaultSession();
 	}
 
 	private runNewSession(): void {
@@ -55,10 +65,10 @@ export class Control {
 	private setBlindsStucture(): void {
 		const anteIsEnabled = (document.getElementById("ante-toggle") as HTMLInputElement).checked;
 		if (anteIsEnabled) {
-			this.sessionHandler.session = Session.initDefaultSessionWithAnte();
+			this._sessionHandler.session = Session.initDefaultSessionWithAnte();
 		}
 		else {
-			this.sessionHandler.session = Session.initDefaultSession();
+			this._sessionHandler.session = Session.initDefaultSession();
 		}
 
 		const levelDuration = (document.getElementById("duration-option") as HTMLInputElement).value;
@@ -100,6 +110,35 @@ export class Control {
 		this.getCurrentSession().blindStructure.decreaseCurrentLevel();
 		this.getCurrentSession().resetRemainingLevelDuration();
 		this.renderBlindStructure();
+	}
+
+	private listenForDndSounds(): void {
+		const dnd = document.querySelector("#sound-custom-dnd") as HTMLInputElement;
+		dnd.addEventListener('dragover', x => this.onDragOver(x));
+		dnd.addEventListener('drop', x => this.onDrop(x));
+	}
+
+	private onDragOver(e: DragEvent): void {
+		e.preventDefault();
+	}
+
+	private onDrop(e: DragEvent): void {
+		e.preventDefault();
+		const files = (e.dataTransfer as DataTransfer).files;
+		const file = files[0];
+		console.log('Loaded file with name=' + file.name);
+		if (!file.type.includes('audio')) return;
+
+		const fr = new FileReader();
+		fr.addEventListener('load', e => {
+			// const audio = new Audio();
+			const audioInfo = document.querySelector("#sound-custom-info") as HTMLInputElement;
+			audioInfo.innerText = "Loaded:\n" + file.name.substring(0, 50);
+			const soundContent = e.target?.result as string;
+			this._customSound = new Audio(soundContent);
+		});
+		fr.readAsDataURL(file);
+
 	}
 
 }
